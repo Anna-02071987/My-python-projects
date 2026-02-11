@@ -2,9 +2,11 @@
 import pytest
 from client.yougile_api import YougileAPI
 
+
 @pytest.fixture()
 def api() -> YougileAPI:
     return YougileAPI()
+
 
 @pytest.fixture()
 def created_project(api: YougileAPI) -> str:
