@@ -1,0 +1,30 @@
+import os
+import pytest
+from sqlalchemy import create_engine
+from sqlalchemy.orm import Session
+from db.models import Base
+
+def _get_database_url() -> str:
+    """Получает URL базы данных из переменной окружения"""
+    url = os.getenv("DATABASE_URL")
+    if not url:
+        raise RuntimeError(
+            "Не задана переменная окружения DATABASE_URL.\n"
+            "Пример: postgresql+psycopg2://myuser:mypassword@localhost:5432/mydatabase"
+        )
+    return url
+
+@pytest.fixture(scope="session")
+def engine():
+    """Фикстура для движка базы данных"""
+    engine_ = create_engine(_get_database_url(), future=True)
+    Base.metadata.create_all(engine_)
+    yield engine_
+    Base.metadata.drop_all(engine_)
+
+@pytest.fixture()
+def db_session(engine):
+    """Фикстура для сессии базы данных"""
+    with Session(engine) as session:
+        yield session
+        session.rollback()
