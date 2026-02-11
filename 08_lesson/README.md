@@ -1,50 +1,50 @@
-Lesson 8 вЂ” Yougile API tests (Projects)
+# Lesson 8 - Yougile API tests (Projects)
+Автотесты API для **Yougile** на **pytest + requests**.
+Покрыты методы Projects:
+- POST /api-v2/projects
+- PUT /api-v2/projects/{id}
+- GET /api-v2/projects/{id}
 
-РђРІС‚РѕС‚РµСЃС‚С‹ API РґР»СЏ Yougile РЅР° pytest + requests.
-РџРѕРєСЂС‹С‚С‹ РјРµС‚РѕРґС‹ Projects:
-
-    вњ… POST /api-v2/projects
-    вњ… PUT /api-v2/projects/{id}
-    вњ… GET /api-v2/projects/{id}
-
-рџљЂ Р—Р°РїСѓСЃРє
-1) РЈСЃС‚Р°РЅРѕРІРёС‚СЊ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё
-
+## Запуск
+### 1) Установить зависимости
+```bash
 pip install pytest requests flake8
-2) Р—Р°РґР°С‚СЊ РїРµСЂРµРјРµРЅРЅС‹Рµ РѕРєСЂСѓР¶РµРЅРёСЏ (PowerShell)
+```
 
-рџ”’ РўРѕРєРµРЅ РЅРµ С…СЂР°РЅРёС‚СЃСЏ РІ РєРѕРґРµ вЂ” С‚РѕР»СЊРєРѕ РІ РїРµСЂРµРјРµРЅРЅС‹С… РѕРєСЂСѓР¶РµРЅРёСЏ.
-
+### 2) Задать переменные окружения (PowerShell)
+Токен не хранится в коде - только в переменных окружения.
+```powershell
 $env:YOUGILE_BASE_URL="https://ru.yougile.com"
 $env:YOUGILE_API_TOKEN="YOUR_TOKEN"
+```
 
-3) Р—Р°РїСѓСЃРє С‚РµСЃС‚РѕРІ
+### 3) Запуск тестов
+```bash
 pytest 08_lesson -v
+```
 
-4) РџСЂРѕРІРµСЂРєР° СЃС‚РёР»СЏ
+### 4) Проверка стиля
+```bash
 flake8 08_lesson
+```
 
-вњ… Р§С‚Рѕ СЃРґРµР»Р°РЅРѕ
+## Что сделано
+- API-клиент вынесен в 08_lesson/client/yougile_api.py
+- Тесты лежат в 08_lesson/tests/
+- Позитивные тесты для POST/PUT/GET
+- Негативные тесты для POST/PUT/GET
+- Тесты стабильные: данные создаются автоматически (фикстура created_project)
+- Секреты (токен) не коммитятся и не хранятся в репозитории
 
-рџ§© API-РєР»РёРµРЅС‚ РІС‹РЅРµСЃРµРЅ РІ 08_lesson/client/yougile_api.py
-
-рџ§Є РўРµСЃС‚С‹ Р»РµР¶Р°С‚ РІ 08_lesson/tests/
-
-рџџў РџРѕР·РёС‚РёРІРЅС‹Рµ С‚РµСЃС‚С‹ РґР»СЏ POST/PUT/GET
-
-рџ”ґ РќРµРіР°С‚РёРІРЅС‹Рµ С‚РµСЃС‚С‹ РґР»СЏ POST/PUT/GET
-
-в™»пёЏ РўРµСЃС‚С‹ СЃС‚Р°Р±РёР»СЊРЅС‹Рµ: РґР°РЅРЅС‹Рµ СЃРѕР·РґР°СЋС‚СЃСЏ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРё (С„РёРєСЃС‚СѓСЂР° created_project)
-
-рџ”ђ РЎРµРєСЂРµС‚С‹ (С‚РѕРєРµРЅ) РЅРµ РєРѕРјРјРёС‚СЏС‚СЃСЏ Рё РЅРµ С…СЂР°РЅСЏС‚СЃСЏ РІ СЂРµРїРѕР·РёС‚РѕСЂРёРё
-
-рџ—‚пёЏ РЎС‚СЂСѓРєС‚СѓСЂР° РїСЂРѕРµРєС‚Р°
+## Структура проекта
+```
 08_lesson/
-в”њв”Ђв”Ђ client/
-в”‚   в”њв”Ђв”Ђ __init__.py
-в”‚   в””в”Ђв”Ђ yougile_api.py
-в”њв”Ђв”Ђ tests/
-в”‚   в”њв”Ђв”Ђ __init__.py
-в”‚   в”њв”Ђв”Ђ conftest.py
-в”‚   в””в”Ђв”Ђ test_projects.py
-в””в”Ђв”Ђ README.md
++-- client/
+¦   +-- __init__.py
+¦   L-- yougile_api.py
++-- tests/
+¦   +-- __init__.py
+¦   +-- conftest.py
+¦   L-- test_projects.py
+L-- config.py
+```
